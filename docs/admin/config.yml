@@ -1,0 +1,85 @@
+# ============================================================
+# Newtown Athletic Club — Content Manager (Sveltia / Decap compatible)
+# Non-technical staff log in here to edit Blog, Events, Classes and Staff.
+# Saving commits to the repo; a GitHub Action rebuilds & republishes the site.
+# ------------------------------------------------------------
+backend:
+  name: github
+  repo: robertjackson-engage/newtown-athletic-club-redesign   # <-- your repo
+  branch: main
+
+# Uploaded images go straight into the live image folder
+media_folder: "docs/assets/img"
+public_folder: "/assets/img"
+
+# Friendly editor settings
+site_url: https://robertjackson-engage.github.io/newtown-athletic-club-redesign/
+display_url: https://robertjackson-engage.github.io/newtown-athletic-club-redesign/
+publish_mode: simple
+
+collections:
+  # ---------------- BLOG ----------------
+  - name: blog
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  —  {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "Title", widget: string }
+      - { name: date, label: "Date", widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: author, label: "Author", widget: string, default: "Newtown Athletic Club Team" }
+      - { name: image, label: "Cover Image", widget: image, required: false, hint: "Wide image works best (16:9)." }
+      - { name: excerpt, label: "Short Summary", widget: text, hint: "1–2 sentences shown on the blog index." }
+      - { name: featured, label: "Feature on blog top?", widget: boolean, default: false, required: false }
+      - { name: body, label: "Post Content", widget: markdown }
+
+  # ---------------- EVENTS / HAPPENINGS ----------------
+  - name: events
+    label: "Events & Happenings"
+    label_singular: "Event"
+    folder: "content/events"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  —  {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "Event Name", widget: string }
+      - { name: date, label: "Date", widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: club, label: "Area", widget: select, required: false, options: ["The Club", "Boutique Studios", "Escape Resort", "Family & Youth", "Wellness", "NPI / Performance"] }
+      - { name: image, label: "Thumbnail", widget: image, required: false }
+      - { name: link, label: "Link / Sign-up URL", widget: string, required: false, default: "/join.html#trial", hint: "Where the card goes when clicked (e.g. /resort.html or a full URL)." }
+      - { name: body, label: "Description", widget: text }
+
+  # ---------------- CLASSES ----------------
+  - name: classes
+    label: "Group Classes"
+    label_singular: "Class"
+    folder: "content/classes"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  ({{category}})"
+    fields:
+      - { name: title, label: "Class Name", widget: string }
+      - { name: category, label: "Studio / Category", widget: select, options: ["The Practice (Yoga)", "Reform (Pilates)", "REV (Cycling)", "PULSE", "Barre Lab", "Six Zone", "105 Hot Studio", "FIT 22", "HYROX", "Aqua", "Other"] }
+      - { name: location, label: "Location", widget: select, required: false, options: ["The Club", "Newtown Performance Institute"] }
+      - { name: image, label: "Image", widget: image, required: false }
+      - { name: body, label: "Description", widget: text }
+
+  # ---------------- STAFF / TRAINERS ----------------
+  - name: staff
+    label: "Staff & Pros"
+    label_singular: "Staff Member"
+    folder: "content/staff"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name}}  —  {{role}}"
+    fields:
+      - { name: name, label: "Name", widget: string }
+      - { name: role, label: "Role / Title", widget: string }
+      - { name: department, label: "Department", widget: select, required: false, options: ["Fitness & Training", "Boutique Studios", "Aquatics", "Wellness & Medical", "Youth & Family", "Membership"] }
+      - { name: specialties, label: "Specialties", widget: list, required: false, hint: "Add one per line." }
+      - { name: photo, label: "Photo", widget: image, required: false }
+      - { name: body, label: "Bio", widget: markdown, required: false }
