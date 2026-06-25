@@ -1,4 +1,4 @@
-/* GHF — interactions */
+/* Newtown Athletic Club — interactions */
 (function () {
   "use strict";
 
@@ -9,7 +9,7 @@
   function setView(v, persist) {
     docEl.setAttribute("data-view", v);
     if (persist !== false) {
-      try { localStorage.setItem("tac-view", v); } catch (e) {}
+      try { localStorage.setItem("nac-view", v); } catch (e) {}
       docEl.classList.add("has-view");
     }
   }
@@ -37,7 +37,7 @@
     var skip = chooser.querySelector(".vc-skip");
     if (skip) skip.addEventListener("click", function () {
       setView("guest", false);
-      try { sessionStorage.setItem("tac-view-skip", "1"); } catch (e) {}
+      try { sessionStorage.setItem("nac-view-skip", "1"); } catch (e) {}
       finishChoice();
     });
   }
@@ -75,7 +75,7 @@
       if (count) count.textContent = "100";
       pre.classList.add("is-done");
       ready();
-      try { sessionStorage.setItem("tac-intro", "1"); } catch (e) {}
+      try { sessionStorage.setItem("nac-intro", "1"); } catch (e) {}
       setTimeout(function () { pre.remove(); }, 1100);
     }
     requestAnimationFrame(tick);

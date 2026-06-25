@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""NAC demo server: static site + server-side Anthropic proxy.
+"""NAC demo server: static site + server-side Wellgentic proxy.
 
-The browser calls POST /api/chat; this server forwards it to the Anthropic API
-with the key from the ANTHROPIC_API_KEY environment variable, so the key never
-appears in any committed file or in client-side code.
+The browser calls POST /api/chat with {"message": "...", "thread_id": "..."}.
+This server forwards it to the Wellgentic endpoint with the key from the
+WELLGENTIC_API_KEY environment variable, so the key never appears in any
+committed file or in client-side code.
 
-Provide the key either way:
-  1. Export it:        ANTHROPIC_API_KEY=sk-ant-...  python3 serve.py
-  2. Or drop a .env:   echo 'ANTHROPIC_API_KEY=sk-ant-...' > .env  &&  python3 serve.py
+Provide the config either way:
+  1. Export it:  WELLGENTIC_API_KEY=... WELLGENTIC_ENDPOINT=https://... python3 serve.py
+  2. Or drop a .env:  printf 'WELLGENTIC_API_KEY=...\\nWELLGENTIC_ENDPOINT=https://...\\n' > .env
 The .env file is gitignored, so the key never reaches the repo.
 """
 import http.server
@@ -20,6 +21,11 @@ import urllib.request
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, "docs")
 PORT = int(os.environ.get("PORT", "4177"))
+
+# Match these to your Wellgentic endpoint's expected request/response shape.
+FIELD_MESSAGE = os.environ.get("WELLGENTIC_FIELD_MESSAGE", "message")
+FIELD_THREAD = os.environ.get("WELLGENTIC_FIELD_THREAD", "thread_id")
+AUTH_STYLE = os.environ.get("WELLGENTIC_AUTH_STYLE", "bearer")  # "bearer" or "xapikey"
 
 
 def load_dotenv():
@@ -48,45 +54,48 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path != "/api/chat":
             self.send_error(404)
             return
-        key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-        if not key:
-            self._json(503, {"error": {"message": "Server has no ANTHROPIC_API_KEY. Restart with: ANTHROPIC_API_KEY=sk-ant-... python3 serve.py"}})
+        key = os.environ.get("WELLGENTIC_API_KEY", "").strip()
+        endpoint = os.environ.get("WELLGENTIC_ENDPOINT", "").strip()
+        if not key or not endpoint:
+            self._json(503, {"error": "Server missing WELLGENTIC_API_KEY / WELLGENTIC_ENDPOINT. "
+                                      "Restart with those set (or in .env)."})
             return
         length = int(self.headers.get("Content-Length", 0))
-        body = self.rfile.read(length)
+        try:
+            incoming = json.loads(self.rfile.read(length) or "{}")
+        except Exception:
+            incoming = {}
+        message = (incoming.get("message") or "").strip()
+        thread = (incoming.get("thread_id") or "").strip()
+        if not message:
+            self._json(400, {"error": "Empty message"})
+            return
+
+        payload = {FIELD_MESSAGE: message}
+        if thread:
+            payload[FIELD_THREAD] = thread
+
+        headers = {"content-type": "application/json", "accept": "application/json"}
+        if AUTH_STYLE == "xapikey":
+            headers["x-api-key"] = key
+        else:
+            headers["authorization"] = "Bearer " + key
+
         req = urllib.request.Request(
-            "https://api.anthropic.com/v1/messages",
-            data=body,
-            headers={
-                "content-type": "application/json",
-                "x-api-key": key,
-                "anthropic-version": "2023-06-01",
-            },
-            method="POST",
+            endpoint, data=json.dumps(payload).encode(), headers=headers, method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                self.send_response(resp.status)
-                self.send_header("Content-Type", resp.headers.get("Content-Type", "application/json"))
-                self.end_headers()
-                # stream SSE chunks straight through
-                while True:
-                    chunk = resp.read(8192)
-                    if not chunk:
-                        break
-                    try:
-                        self.wfile.write(chunk)
-                        self.wfile.flush()
-                    except BrokenPipeError:
-                        break
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                self._raw(resp.status, resp.read(),
+                          resp.headers.get("Content-Type", "application/json"))
         except urllib.error.HTTPError as e:
             self._raw(e.code, e.read())
         except Exception as e:  # noqa: BLE001 — surface anything to the widget
-            self._json(502, {"error": {"message": str(e)}})
+            self._json(502, {"error": str(e)})
 
-    def _raw(self, status, data):
+    def _raw(self, status, data, ctype="application/json"):
         self.send_response(status)
-        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(data)))
         self.end_headers()
         self.wfile.write(data)
@@ -101,6 +110,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     socketserver.ThreadingTCPServer.allow_reuse_address = True
     with socketserver.ThreadingTCPServer(("127.0.0.1", PORT), Handler) as srv:
-        has_key = "yes" if os.environ.get("ANTHROPIC_API_KEY") else "NO — chat will be disabled"
-        print(f"NAC site on http://localhost:{PORT}  (API key present: {has_key})")
+        ready = "yes" if (os.environ.get("WELLGENTIC_API_KEY") and os.environ.get("WELLGENTIC_ENDPOINT")) else "NO — set WELLGENTIC_API_KEY + WELLGENTIC_ENDPOINT"
+        print(f"NAC site on http://localhost:{PORT}  (Wellgentic configured: {ready})")
         srv.serve_forever()

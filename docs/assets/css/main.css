@@ -1058,7 +1058,7 @@ body.choice-done .view-chooser {
 }
 
 /* ============================================================
-   GHF Coach — AI concierge
+   NAC Concierge — AI concierge
    ============================================================ */
 .chat-orb {
   position: fixed; right: clamp(18px, 3vw, 36px); bottom: clamp(18px, 3vw, 36px); z-index: 1300;
@@ -1300,7 +1300,7 @@ body.chat-open .chat-panel { opacity: 1; transform: none; pointer-events: auto; 
 }
 
 /* ============================================================
-   The Athletic Clubs — font weight + brand legibility overrides
+   Newtown Athletic Club — font weight + brand legibility overrides
    Oswald needs heavy weight to carry the display role; teal (#65cbcb)
    is vivid on dark but low-contrast with white text and on light.
    ============================================================ */
@@ -1342,7 +1342,7 @@ body.chat-open .chat-panel { opacity: 1; transform: none; pointer-events: auto; 
 .marquee--accent span i { color: var(--accent-ink); }
 .join-promo { background: linear-gradient(90deg, var(--accent-2), var(--accent)); color: var(--on-accent); }
 
-/* ---------- The Athletic Clubs logo lockup ---------- */
+/* ---------- Newtown Athletic Club logo lockup ---------- */
 .brand__lockup { display: inline-flex; align-items: center; gap: 12px; }
 .brand__icon { width: 40px; height: 40px; flex: 0 0 auto; color: var(--accent); }
 .brand__name { font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
