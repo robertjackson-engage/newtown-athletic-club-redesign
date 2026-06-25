@@ -1188,12 +1188,12 @@ body.chat-open .chat-panel { opacity: 1; transform: none; pointer-events: auto; 
 }
 
 /* ============================================================
-   FORMA brand legibility overrides
-   Cyan (#08d6dd) is vivid on dark but low-contrast with white text
-   and on light backgrounds — so fills get dark text, and light
-   sections use a deepened teal for accent text.
+   NAC brand legibility overrides
+   Green is vivid on dark but low-contrast with white text and on
+   light backgrounds — so fills get near-black text, and light
+   sections use a deepened green for accent text.
+   (accent-ink / on-accent are defined in :root above — no re-override)
    ============================================================ */
-:root { --on-accent: #04201f; --accent-ink: #047a80; }
 
 /* solid cyan controls get near-black text, not white */
 .btn--solid { color: var(--on-accent); }
@@ -1315,7 +1315,7 @@ body.chat-open .chat-panel { opacity: 1; transform: none; pointer-events: auto; 
 .eyebrow, .btn, .menu-toggle, .stat__label, .card__num, .hero__kicker, .hero__meta,
 .inline-link, .pillar__num, .sched__col .where, .loc-badge, .addon-head { font-weight: 600; }
 
-:root { --on-accent: #06201f; --accent-ink: #1f7e7e; }
+/* (accent-ink / on-accent come from :root at the top — NAC green, no override) */
 
 .btn--solid { color: var(--on-accent); }
 .btn--solid:hover { color: var(--ink); }
@@ -1422,3 +1422,92 @@ body.chat-open .chat-panel { opacity: 1; transform: none; pointer-events: auto; 
 .price-card .btn { margin-top: 6px; justify-content: center; }
 .section--light .price-card { background: #fff; border-color: var(--line-dark); }
 .section--light .price-card p { color: var(--muted-dark); }
+
+/* ============================================================
+   NAC — LIGHT THEME  ("more white than black")
+   Body + content components go light; hero, header, footer,
+   CTA bands and full-screen overlays intentionally stay dark.
+   ============================================================ */
+body { background: var(--bone); color: var(--ink); }
+
+/* alternating rhythm: default sections = near-white (body); --light = soft gray */
+.section--light { background: #e8ebe9; color: var(--ink); }
+
+/* accent text sits a touch deeper on white for contrast */
+.eyebrow { color: var(--accent-ink); }
+.h-display .serif { color: var(--accent-ink); }
+.h-mid .serif { color: var(--accent-ink); }
+.inline-link { color: var(--accent-ink); }
+
+/* body copy */
+.body-copy { color: var(--muted-dark); }
+
+/* stats */
+.stats { border-color: var(--line-dark); }
+.stat { border-color: var(--line-dark); }
+.stat__num { color: var(--ink); }
+.stat__label { color: var(--muted-dark); }
+
+/* marquee (plain) — accent/ghost variants keep their own look */
+.marquee { border-color: var(--line-dark); }
+.marquee span { color: var(--ink); }
+.marquee span i { color: var(--accent-ink); }
+.marquee--ghost span { -webkit-text-stroke-color: rgba(16,23,28,0.30); }
+.marquee--accent span, .marquee--accent span i { color: var(--on-accent); }
+
+/* cards */
+.card__media { background: var(--bone-2); }
+.card__below p { color: var(--muted-dark); }
+
+/* numbered rows */
+.rows { border-color: var(--line-dark); }
+.row-item { border-color: var(--line-dark); }
+.row-item__desc { color: var(--muted-dark); }
+.row-item__arrow { border-color: var(--line-dark); }
+
+/* pillars → white tiles on a faint grid */
+.pillars { background: var(--line-dark); border-color: var(--line-dark); }
+.pillar { background: var(--bone); }
+.pillar:hover { background: var(--bone-2); }
+.pillar p { color: var(--muted-dark); }
+
+/* quote + testimonial slider */
+.quote-band figcaption { color: var(--muted-dark); }
+.t-slider__nav button { border-color: var(--line-dark); color: var(--ink); }
+
+/* accordion / FAQ */
+.acc { border-color: var(--line-dark); }
+.acc__item { border-color: var(--line-dark); }
+.acc__icon { border-color: var(--line-dark); }
+.acc__body-inner { color: var(--muted-dark); }
+
+/* checklist */
+.checklist li { border-color: var(--line-dark); }
+
+/* schedule tables */
+.sched { background: var(--line-dark); border-color: var(--line-dark); }
+.sched__col { background: var(--bone); }
+.sched__col dl > div { border-color: var(--line-dark); }
+.sched__col dt { color: var(--muted-dark); }
+
+/* location cards */
+.loc { border-color: var(--line-dark); }
+.loc-item { border-color: var(--line-dark); }
+.loc-item .loc-hours div { border-color: var(--line-dark); }
+.loc-item .loc-hours dt, .loc-item address { color: var(--muted-dark); }
+
+/* forms on light */
+.field input, .field select, .field textarea { border-color: rgba(16,23,28,0.25); color: var(--ink); }
+.field label { color: var(--muted-dark); }
+.form-note { color: var(--muted-dark); }
+
+/* temps (hot studio) */
+.temps { background: var(--line-dark); border-color: var(--line-dark); }
+.temp { background: var(--bone); }
+.temp:hover { background: var(--bone-2); }
+
+/* pricing tier cards (join page) read on white */
+.price-card { background: #fff; border-color: var(--line-dark); }
+.price-card p { color: var(--muted-dark); }
+.price-card li { color: var(--ink-2); }
+.price-card--feat { background: linear-gradient(180deg, rgba(111,200,134,0.10), rgba(111,200,134,0.02)); }
