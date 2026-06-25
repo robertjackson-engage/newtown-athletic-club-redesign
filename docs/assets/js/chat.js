@@ -11,6 +11,8 @@
   var ENDPOINT = CFG.proxyUrl || CFG.endpoint || "";
   var F_MSG = CFG.fieldMessage || "message";
   var F_THREAD = CFG.fieldThread || "thread_id";
+  var F_WORKFLOW = CFG.fieldWorkflow || "workflow_id";
+  var WORKFLOW = (CFG.workflowId !== undefined && CFG.workflowId !== null) ? CFG.workflowId : "";
   var RESP_PATH = CFG.responsePath || "reply";
   var THREAD_PATH = CFG.threadPath || "thread_id";
 
@@ -161,6 +163,7 @@
     var payload = {};
     payload[F_MSG] = text;
     payload[F_THREAD] = threadId;
+    if (WORKFLOW !== "" && !CFG.proxyUrl) payload[F_WORKFLOW] = WORKFLOW;
 
     fetch(ENDPOINT, { method: "POST", headers: headers, body: JSON.stringify(payload) })
       .then(function (res) {

@@ -25,6 +25,8 @@ PORT = int(os.environ.get("PORT", "4177"))
 # Match these to your Wellgentic endpoint's expected request/response shape.
 FIELD_MESSAGE = os.environ.get("WELLGENTIC_FIELD_MESSAGE", "message")
 FIELD_THREAD = os.environ.get("WELLGENTIC_FIELD_THREAD", "thread_id")
+FIELD_WORKFLOW = os.environ.get("WELLGENTIC_FIELD_WORKFLOW", "workflow_id")
+WORKFLOW_ID = os.environ.get("WELLGENTIC_WORKFLOW_ID", "78")
 AUTH_STYLE = os.environ.get("WELLGENTIC_AUTH_STYLE", "bearer")  # "bearer" or "xapikey"
 
 
@@ -74,6 +76,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         payload = {FIELD_MESSAGE: message}
         if thread:
             payload[FIELD_THREAD] = thread
+        if WORKFLOW_ID:
+            payload[FIELD_WORKFLOW] = WORKFLOW_ID
 
         headers = {"content-type": "application/json", "accept": "application/json"}
         if AUTH_STYLE == "xapikey":

@@ -18,6 +18,10 @@ window.NAC_CHAT = {
   apiKey: "",
   authStyle: "bearer",          // "bearer" -> Authorization: Bearer <key>, or "xapikey" -> x-api-key
 
+  /* The Wellgentic workflow (agent) this chat routes to */
+  workflowId: "78",
+  fieldWorkflow: "workflow_id",
+
   /* Request body field names your endpoint expects */
   fieldMessage: "message",
   fieldThread: "thread_id",
