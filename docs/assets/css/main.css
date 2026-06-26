@@ -1511,3 +1511,50 @@ body { background: var(--bone); color: var(--ink); }
 .price-card p { color: var(--muted-dark); }
 .price-card li { color: var(--ink-2); }
 .price-card--feat { background: linear-gradient(180deg, rgba(111,200,134,0.10), rgba(111,200,134,0.02)); }
+
+/* ============================================================
+   Light footer — cohesive with the white theme; tame the
+   oversized ghost wordmark so the page bottom doesn't read heavy.
+   ============================================================ */
+.site-footer { background: #eceeec; border-top: 1px solid var(--line-dark); }
+.brand--footer .brand__logo { filter: brightness(0); }            /* dark logo on light footer */
+.brand--footer .brand__name { color: var(--ink); }
+.brand--footer .brand__name em { color: var(--accent-ink); }
+.site-footer h5 { color: var(--muted-dark); }
+.site-footer__brand p { color: var(--muted-dark); }
+.site-footer__links a { color: var(--muted-dark); }
+.site-footer__links a:hover { color: var(--accent-ink); }
+.site-footer__contact a { color: var(--muted-dark); }
+.site-footer__contact a:hover { color: var(--accent-ink); }
+.site-footer__contact .tel { color: var(--ink); }
+.news-form { border-color: var(--line-dark); }
+.news-form input { color: var(--ink); }
+.news-form input::placeholder { color: var(--muted-dark); }
+.news-form button { color: var(--accent-ink); }
+.socials a { border-color: var(--line-dark); color: var(--muted-dark); }
+.site-footer__bottom { border-color: var(--line-dark); color: var(--muted-dark); }
+.site-footer__bottom a:hover { color: var(--accent-ink); }
+.site-footer__mega { -webkit-text-stroke-color: rgba(16,23,28,0.07); font-size: clamp(40px, 7vw, 120px); transform: translateY(8%); }
+
+/* outline buttons that sit on white (e.g. non-featured pricing cards) need
+   dark text/border instead of the default light-on-dark treatment */
+.price-card .btn:not(.btn--solid) { border-color: var(--line-dark); color: var(--ink); }
+.price-card .btn:not(.btn--solid):hover { color: var(--on-accent); border-color: var(--accent); }
+
+/* bright accent green (#6fc886) is low-contrast as TEXT on white — use the
+   deeper accent-ink for any green text sitting on light backgrounds.
+   (green FILLS keep bright --accent, which is correct.) */
+.row-item__idx, .pillar__num, .sched__col .where, .loc-item .phone, .loc-badge,
+.quote-band__mark, .stat__num .sfx, .price-card__amt,
+.checklist li::before, .acc__body-inner li::before { color: var(--accent-ink); }
+.loc-badge { border-color: var(--accent-ink); }
+.field input:focus + label, .field input:not(:placeholder-shown) + label,
+.field textarea:focus + label, .field textarea:not(:placeholder-shown) + label,
+.field select:focus + label, .field.has-value label { color: var(--accent-ink); }
+
+/* blog post body on white */
+.post-body { color: var(--ink); }
+.post-body strong { color: var(--ink); }
+.post-body a { color: var(--accent-ink); }
+.post-body li::before { color: var(--accent-ink); }
+.price-card__amt span { color: var(--muted-dark); }

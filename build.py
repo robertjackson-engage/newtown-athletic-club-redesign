@@ -374,7 +374,7 @@ def form_section(sec_id, num, eyebrow, title_html, text, btn, light=True, extra=
     </div>
     <div class="intro-grid__right reveal"><form class="form-grid" data-demo>{f_html}
       <div class="field field--full"><select name="interest" id="{sec_id}-interest" aria-label="I'm interested in"><option value="">&nbsp;</option>{opts}</select><label for="{sec_id}-interest">I'm interested in</label></div>
-      <button class="btn {'btn--dark' if light else ''} field--full" type="submit" style="justify-content:center">{btn} <span class="arr">→</span></button>
+      <button class="btn btn--dark field--full" type="submit" style="justify-content:center">{btn} <span class="arr">→</span></button>
     </form><p class="form-note">We'll follow up by phone, email or text. No commitment — we're just here to help.</p></div>
   </div></div>
 </section>
@@ -1050,7 +1050,7 @@ swim_lessons_body = hero(
     ("Private &amp; Semi-Private", "One-on-one or small-group lessons for kids and adults who want focused, faster progress."),
     ("Masters &amp; Triathlon", "Coached training for adult swimmers refining technique or preparing for open-water and triathlon events."),
   ])}
-  <p class="form-note reveal" style="margin-top:24px">Register online or email <a href="mailto:swimacademy@newtownathletic.com" style="color:var(--accent)">swimacademy@newtownathletic.com</a>. Lessons run 30 minutes in small 1:4–6 ratios.</p>
+  <p class="form-note reveal" style="margin-top:24px">Register online or email <a href="mailto:swimacademy@newtownathletic.com" style="color:var(--accent-ink)">swimacademy@newtownathletic.com</a>. Lessons run 30 minutes in small 1:4–6 ratios.</p>
 </div></section>
 """ + cta_band('Confidence starts in the <span class="serif">shallow end</span>', "Register your swimmer today and watch them grow from first bubbles to first ribbons.", f"{IMG}/NAC-Website-Sections-13.jpg", primary=("Register", "contact.html"))
 
@@ -1070,7 +1070,7 @@ lifeguard_body = hero(
     <div class="row-item"><span class="row-item__idx">03</span><span class="row-item__title">CPR &amp; Basic Life Support</span><span class="row-item__desc">Essential life-saving skills for caregivers, coaches and professionals.</span><span class="row-item__arrow">→</span></div>
     <div class="row-item"><span class="row-item__idx">04</span><span class="row-item__title">Babysitting (ages 11–15)</span><span class="row-item__desc">Confidence and skills for young caregivers. $120 members / $150 public.</span><span class="row-item__arrow">→</span></div>
   </div>
-  <p class="form-note reveal" style="margin-top:24px">Enroll online or email <a href="mailto:swimacademy@newtownathletic.com" style="color:var(--accent)">swimacademy@newtownathletic.com</a>.</p>
+  <p class="form-note reveal" style="margin-top:24px">Enroll online or email <a href="mailto:swimacademy@newtownathletic.com" style="color:var(--accent-ink)">swimacademy@newtownathletic.com</a>.</p>
 </div></section>
 """ + cta_band('Become the one who <span class="serif">saves the day</span>', "Spots fill fast each season. Enroll in a certification course today.", f"{IMG}/NAC-Website-Sections-11.jpg", primary=("Enroll", "contact.html"))
 
@@ -1205,7 +1205,7 @@ gymnastics_body = hero(
     <div class="row-item"><span class="row-item__idx">02</span><span class="row-item__title">Pre-Team</span><span class="row-item__desc">Ages 4 and up. Tuesdays and Thursdays, 5–7pm — the bridge toward competitive gymnastics.</span><span class="row-item__arrow">→</span></div>
     <div class="row-item"><span class="row-item__idx">03</span><span class="row-item__title">USAIGC Competition Team</span><span class="row-item__desc">Ages 5 and up, invite-only. Five to seven competitions a season, practicing 2–3 times a week.</span><span class="row-item__arrow">→</span></div>
   </div>
-  <p class="form-note reveal" style="margin-top:24px">Questions? Email <a href="mailto:gymnastics@newtownathletic.com" style="color:var(--accent)">gymnastics@newtownathletic.com</a>.</p>
+  <p class="form-note reveal" style="margin-top:24px">Questions? Email <a href="mailto:gymnastics@newtownathletic.com" style="color:var(--accent-ink)">gymnastics@newtownathletic.com</a>.</p>
 </div></section>
 """ + cta_band('Build strength and <span class="serif">confidence</span>', "From recreational classes to the competition team, there's a place for your gymnast.", f"{IMG}/Competitive-Gymnastics-Team-Newtown-PA.png", primary=("Join", "contact.html"))
 
@@ -1410,7 +1410,7 @@ hours_body = hero(
   <div class="sched__col"><h4>Membership Sales</h4><span class="where">New members</span><dl>
     <div><dt>Mon–Thu</dt><dd>9:00a – 7:00p</dd></div><div><dt>Fri–Sun</dt><dd>9:00a – 4:00p</dd></div></dl></div>
 </div>
-<p class="body-copy reveal" style="margin-top:26px">Resort hours are weather-dependent. For café hours, holiday schedules and program-specific times, call <a href="tel:{PHONE_TEL}" style="color:var(--accent)">{PHONE}</a> or ask the front desk.</p>
+<p class="body-copy reveal" style="margin-top:26px">Resort hours are weather-dependent. For café hours, holiday schedules and program-specific times, call <a href="tel:{PHONE_TEL}" style="color:var(--accent-ink)">{PHONE}</a> or ask the front desk.</p>
 </div></section>
 """ + cta_band('Come live your <span class="serif">healthiest life</span>', "Whatever the hour, your home for health is ready. Start with a complimentary pass.", f"{IMG}/General-5-scaled.jpg")
 
@@ -1424,10 +1424,10 @@ contact_body = hero(
 <section class="section section--tight"><div class="wrap"><div class="loc-grid" data-stagger>
   <div class="loc-item"><h4>Visit</h4><a class="phone" href="https://maps.google.com/?q=120+Pheasant+Run+Newtown+PA+18940" target="_blank" rel="noopener">120 Pheasant Run<br>Newtown, PA 18940</a></div>
   <div class="loc-item"><h4>Main Line</h4><a class="phone" href="tel:{PHONE_TEL}">{PHONE}</a></div>
-  <div class="loc-item"><h4>Membership</h4><a class="phone" href="tel:2677109228">267-710-9228 ×286</a><a href="mailto:memberadmin@newtownathletic.com" style="color:var(--accent)">memberadmin@newtownathletic.com</a></div>
-  <div class="loc-item"><h4>Programs &amp; Kids</h4><a class="phone" href="tel:2159680600">215-968-0600 ×156</a><a href="mailto:programs@newtownathletic.com" style="color:var(--accent)">programs@newtownathletic.com</a></div>
-  <div class="loc-item"><h4>Swim &amp; Lifeguarding</h4><a href="mailto:swimacademy@newtownathletic.com" style="color:var(--accent)">swimacademy@newtownathletic.com</a></div>
-  <div class="loc-item"><h4>Gymnastics</h4><a href="mailto:gymnastics@newtownathletic.com" style="color:var(--accent)">gymnastics@newtownathletic.com</a></div>
+  <div class="loc-item"><h4>Membership</h4><a class="phone" href="tel:2677109228">267-710-9228 ×286</a><a href="mailto:memberadmin@newtownathletic.com" style="color:var(--accent-ink)">memberadmin@newtownathletic.com</a></div>
+  <div class="loc-item"><h4>Programs &amp; Kids</h4><a class="phone" href="tel:2159680600">215-968-0600 ×156</a><a href="mailto:programs@newtownathletic.com" style="color:var(--accent-ink)">programs@newtownathletic.com</a></div>
+  <div class="loc-item"><h4>Swim &amp; Lifeguarding</h4><a href="mailto:swimacademy@newtownathletic.com" style="color:var(--accent-ink)">swimacademy@newtownathletic.com</a></div>
+  <div class="loc-item"><h4>Gymnastics</h4><a href="mailto:gymnastics@newtownathletic.com" style="color:var(--accent-ink)">gymnastics@newtownathletic.com</a></div>
 </div></div></section>
 """ + form_section(
     "reach", "01", "Send us a note",
@@ -1460,7 +1460,7 @@ faq_body = hero(
 def legal_page(title, intro):
     return hero(title, [title], intro, img=f"{IMG}/General-5-scaled.jpg", crumb=title, page=True) + f"""
 <section class="section section--tight"><div class="wrap" style="max-width:820px">
-  <p class="body-copy reveal">This is a redesign demonstration of newtownathletic.com. The full {title.lower()} from the Newtown Athletic Club applies to all members and guests. For the complete, current policy, please contact us at <a href="tel:{PHONE_TEL}" style="color:var(--accent)">{PHONE}</a> or visit the front desk at 120 Pheasant Run, Newtown, PA 18940.</p>
+  <p class="body-copy reveal">This is a redesign demonstration of newtownathletic.com. The full {title.lower()} from the Newtown Athletic Club applies to all members and guests. For the complete, current policy, please contact us at <a href="tel:{PHONE_TEL}" style="color:var(--accent-ink)">{PHONE}</a> or visit the front desk at 120 Pheasant Run, Newtown, PA 18940.</p>
   <p class="body-copy reveal">The Newtown Athletic Club is committed to a welcoming, inclusive experience for every member and guest — online and in the club. If you have any trouble using this site or need assistance, we're happy to help.</p>
 </div></section>"""
 privacy_body = legal_page("Privacy Policy", "How the Newtown Athletic Club collects, uses and protects your information.")
