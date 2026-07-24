@@ -104,6 +104,11 @@
     }
   });
 
+  /* smooth scrolling arms only after load — entry positioning stays instant */
+  window.addEventListener("load", function () {
+    setTimeout(function () { docEl.classList.add("smooth-scroll"); }, 80);
+  });
+
   /* ---------- header behavior ---------- */
   /* persistent nav: always visible so Get Pricing never leaves the screen;
      compacts into a glass bar once scrolled */
