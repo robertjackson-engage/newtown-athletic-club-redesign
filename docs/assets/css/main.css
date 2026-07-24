@@ -2,9 +2,10 @@
    NEWTOWN ATHLETIC CLUB — "SIGNATURE" DESIGN SYSTEM
    A ground-up rebuild. Light-first, architectural editorial.
    Bricolage Grotesque display (heavy, tight, sentence-case) with a
-   thin-weight emerald accent — Inter Tight body. Sharp corners,
+   thin-weight green accent — Inter Tight body. Sharp corners,
    framed heroes, generous near-black chapters, tabular numerals.
-   Emerald is the single accent. No gold. No serif.
+   NAC brand green (#65bc7b, from the logo mark) is the single accent,
+   deepened to #2e7d4e for legible text on light. No gold. No serif.
    A deliberately different third pole from the dark/kinetic sister
    sites AND the earlier serif register.
    ============================================================ */
@@ -23,10 +24,10 @@
   --muted-dark: rgba(242, 241, 234, 0.62);
   --line-dark: rgba(242, 241, 234, 0.16);
 
-  --green: #12805a;            /* jewel emerald — the single accent (no gold) */
-  --green-2: #0e6647;          /* deeper emerald for hover / solid press */
-  --green-bright: #2fce8b;     /* vivid emerald for accents on dark grounds */
-  --green-tint: #e2ede7;       /* pale wash for feature surfaces */
+  --green: #2e7d4e;            /* deep NAC green — contrast-safe as text on light (same hue as brand #65bc7b) */
+  --green-2: #245f3c;          /* deeper green for hover / solid press */
+  --green-bright: #65bc7b;     /* THE authentic NAC brand green (logo-mark stroke) — accents on dark grounds */
+  --green-tint: #e7f1ea;       /* pale brand-green wash for feature surfaces */
 
   /* legacy aliases → emerald, so any residual rule keeps working */
   --brass: var(--green);
