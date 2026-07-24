@@ -103,6 +103,8 @@ MENU = [
     ("Membership", "membership.html"),
     ("Pricing", "pricing.html"),
     ("NAC Premier", "premier.html"),
+    ("Seasonal Membership", "seasonal.html"),
+    ("Financial Assistance", "scholarship.html"),
     ("Personal Training", "fitness.html"),
     ("Back Gym Weight Room", "weight-room.html"),
     ("FIT 22 Strength Studio", "strength-studio.html"),
@@ -114,9 +116,11 @@ MENU = [
     ("Barre Lab", "barre.html"),
     ("SIX ZONE", "six-zone.html"),
     ("105 Hot Studio", "hot-105.html"),
+    ("Newtown Performance Institute", "performance.html"),
     ("HYROX", "hyrox.html"),
     ("Swim &amp; Aquatics", "swim.html"),
     ("Escape Resort", "resort.html"),
+    ("The Village Farm", "village-farm.html"),
     ("Stretch &amp; Recovery", "stretch-recovery.html"),
     ("Kids Club &amp; Family", "family.html"),
     ("Camp NAC", "camps.html"),
@@ -124,6 +128,8 @@ MENU = [
     ("Youth Performance", "youth-training.html"),
     ("Wellness Services", "wellness.html"),
     ("Functional Medicine", "functional-medicine.html"),
+    ("The Well Lounge Med Spa", "the-well-lounge.html"),
+    ("Elevate Events", "events.html"),
     ("Giving Back", "giving.html"),
     ("Hours", "hours.html"),
     ("FAQ", "faq.html"),
@@ -143,7 +149,7 @@ def head(title, desc):
 <meta name="description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Inter+Tight:ital,wght@0,400..700;1,400..600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="{IMG}/nac-mark.svg">
 <link rel="stylesheet" href="assets/css/main.css?v={V}">
 <script>(function(){{try{{
@@ -398,6 +404,15 @@ def studio_grid(items):
         cards += (f'<a class="card" href="{slug}"><div class="card__media"><img src="{IMG}/{im}" alt="{label}" loading="lazy">'
                   f'<span class="card__num">{i:02d}</span><div class="card__label"><h3>{label}</h3><span class="go">Explore →</span></div></div></a>')
     return cards
+
+
+def rows(items):
+    """items: (title, desc)"""
+    out = '<div class="rows reveal">'
+    for i, (t, d) in enumerate(items, 1):
+        out += (f'<div class="row-item"><span class="row-item__idx">{i:02d}</span><span class="row-item__title">{t}</span>'
+                f'<span class="row-item__desc">{d}</span><span class="row-item__arrow">→</span></div>')
+    return out + "</div>"
 
 
 def page(filename, title, desc, active, body):
@@ -686,7 +701,15 @@ college_body = hero(
     img=f"{IMG}/group-ex-classes-newtown-athletic-club-newtown-pa-12.jpg", crumb='<a href="membership.html">Membership</a> &nbsp;/&nbsp; College',
     actions=[("Get Started", "join.html#trial", True)],
     meta=["1 mo · $200", "2 mo · $400", "3 mo · $600"], page=True,
-) + cta_band('Keep your <span class="serif">momentum</span>', "Train while you're home for the break with full access to the club, studios and resort.", f"{IMG}/General-5-scaled.jpg", primary=("Get Started", "join.html#trial"))
+) + f"""
+<section class="section"><div class="wrap"><div class="intro-grid">
+  <div><p class="eyebrow"><span class="num">01</span> Home on break</p><h2 class="h-display reveal">Full access while <span class="serif">you're home</span></h2></div>
+  <div class="intro-grid__right">
+    <p class="lede reveal">The holiday college membership covers Spring, Summer, Thanksgiving and Winter breaks for students age 24 and under whose college is 25+ miles away. Choose one month ($200), two ($400) or three ($600) and get the full campus — pools, studios, weight rooms and the resort.</p>
+    <p class="body-copy reveal">Living nearby year-round instead? See our <a href="seasonal.html">Seasonal Membership</a>, or ask about <a href="scholarship.html">financial assistance</a>.</p>
+  </div>
+</div></div></section>
+""" + cta_band('Keep your <span class="serif">momentum</span>', "Train while you're home for the break with full access to the club, studios and resort.", f"{IMG}/General-5-scaled.jpg", primary=("Get Started", "join.html#trial"))
 
 # ============================================================ GUESTS
 guests_body = hero(
@@ -1124,6 +1147,7 @@ family_body = hero(
       ("Youth Performance", "youth-training.html", "sports-performance-training-newtown-pa.jpg", ""),
       ("Birthday Parties", "birthday-parties.html", "birthday-parties.jpg", ""),
       ("Newtown Discovery Preschool", "preschool.html", "RAY00006-scaled.jpg", ""),
+      ("The Village Farm", "village-farm.html", "The-Village-Farm-8.png", ""),
       ("In-Club Golf", "golf.html", "NAC-Website-Sections-5.jpg", ""),
     ])}
   </div>
@@ -1468,10 +1492,154 @@ terms_body = legal_page("Terms of Use", "The terms that govern your use of our w
 
 
 # ============================================================ BUILD ALL
+# ============================================================ THE WELL LOUNGE MED SPA
+well_body = hero(
+    "The Well Lounge", ["Medicine meets", '<span class="serif">aesthetics</span>'],
+    "The Well Lounge is the NAC's medical spa — where clinical expertise and aesthetics come together. From advanced skin resurfacing and body contouring to injectables and IV wellness, look and feel your best under professional care.",
+    img=f"{IMG}/the-well-lounge-services-newtown-pa.jpg", crumb='<a href="wellness.html">Wellness</a> &nbsp;/&nbsp; The Well Lounge',
+    actions=[("Book a Consultation", "contact.html", True), ("The treatments", "#treatments", False)],
+    meta=["Medical-grade aesthetics", "215-360-3940", "Members save"], page=True,
+) + split(
+    "Med spa, elevated", "01", 'Clinical results, in a <span class="serif">luxury setting</span>',
+    ["The Well Lounge pairs a licensed medical team with the calm of a true spa. Every treatment starts with a consultation so your plan is built around your skin, your body and your goals.",
+     "It lives right inside the club, so recovery, fitness and aesthetics all work together — book a treatment before your workout or after a swim, then step straight into the rest of your day."],
+    f"{IMG}/spa-1.png", "The Well Lounge", cta=("Call 215-360-3940", "tel:2153603940"), tag="Inside the NAC"
+) + f"""
+<section class="section section--light" id="treatments"><div class="wrap">
+  <div class="cards-head"><div><p class="eyebrow"><span class="num">02</span> The menu</p><h2 class="h-display reveal" style="font-size:clamp(34px,4.6vw,72px)">What we <span class="serif">offer</span></h2></div></div>
+  {accordion([
+    ("Body Contouring &amp; EmSculpt NEO", "Non-invasive fat reduction and muscle building — sculpt and tone without downtime, and pair it with your training for real results."),
+    ("Skin Resurfacing — HALO &amp; BBL", "Advanced laser resurfacing and broadband light to smooth tone and texture, soften sun damage and treat rosacea and redness."),
+    ("Injectables &amp; Neuromodulators", "Wrinkle relaxers and dermal fillers administered by licensed medical providers for natural, refreshed results."),
+    ("Medical Facials &amp; Peels", "Professional-grade facials, microneedling and chemical peels tailored to your skin."),
+    ("IV Wellness &amp; Injections", "Hydration, energy and recovery IV drips and vitamin injections to complement your wellness routine."),
+  ])}
+  <p class="form-note reveal" style="margin-top:24px">Book a complimentary consultation to build your plan — call <a href="tel:2153603940" style="color:var(--green)">215-360-3940</a> or ask at the front desk.</p>
+</div></section>
+""" + cta_band('Look as good as you <span class="serif">feel</span>', "Book a consultation at The Well Lounge and let our medical team build a plan around you.", f"{IMG}/WL-The-Well-Lounge-DARK-GREEN.png", primary=("Book a Consultation", "contact.html"))
+
+
+# ============================================================ THE VILLAGE FARM
+village_body = hero(
+    "The Village Farm", ["Where the club meets", 'the <span class="serif">countryside</span>'],
+    "The Village Farm is the NAC's one-of-a-kind outdoor extension — a working farm with animals, open fields and a barn, hosting everything from Goat Yoga and outdoor fitness to food-truck rallies, twilight movies, markets and unforgettable birthday parties.",
+    img=f"{IMG}/The-Village-Farm-8.png", crumb='<a href="family.html">Family</a> &nbsp;/&nbsp; The Village Farm',
+    actions=[("Plan a Visit", "contact.html", True), ("What's happening", "#happenings", False)],
+    meta=["Working farm &amp; barn", "Events &amp; camps", "Pony rides &amp; petting zoo"], page=True,
+) + f"""
+<section class="section" id="happenings"><div class="wrap">
+  <div class="cards-head"><div><p class="eyebrow"><span class="num">01</span> On the farm</p><h2 class="h-display reveal" style="font-size:clamp(34px,4.6vw,72px)">A little bit of <span class="serif">everything</span></h2></div></div>
+  {rows([
+    ("Outdoor Fitness &amp; Goat Yoga", "Group fitness pop-ups under the open sky — plus the class everyone talks about: yoga with baby goats."),
+    ("Seasonal Events", "Food-truck rallies, twilight movies, flea and farmers markets, rodeos and seasonal festivals all season long."),
+    ("Animals &amp; Pony Rides", "A petting zoo, pony rides, a jumping pillow and bird sanctuaries — the farm is built for families to roam."),
+    ("Birthday Parties &amp; Dinner with Ponies", "On-the-farm parties, Goat Yoga parties and Dinner with Ponies — celebrations you won't find anywhere else."),
+    ("Village Farm Summer Camp", "A summer camp for ages 6–12 set right on the farm, blending animals, outdoors and hands-on fun."),
+  ])}
+</div></section>
+""" + split(
+    "A different kind of day", "02", 'Trade the treadmill for the <span class="serif">open air</span>',
+    ["The Village Farm is what happens when a world-class club decides fitness and community shouldn't stop at the front doors. It's part petting zoo, part event venue, part outdoor studio — and entirely NAC.",
+     "Follow the farm for the full calendar of markets, movies, festivals and pop-up classes, and bring the whole family along."],
+    f"{IMG}/NAC-Website-Sections-8.jpg", "The Village Farm", rev=True, cta=("Ask about the farm", "contact.html"), tag="Open air"
+) + cta_band('Come out to the <span class="serif">farm</span>', "Markets, movies, animals and outdoor fitness — the Village Farm is the club's best-kept secret.", f"{IMG}/The-Village-Farm-8.png", primary=("Plan a Visit", "contact.html"))
+
+
+# ============================================================ NEWTOWN PERFORMANCE INSTITUTE
+npi_body = hero(
+    "Newtown Performance Institute", ["Serious training,", 'serious <span class="serif">results</span>'],
+    "The Newtown Performance Institute is the NAC's home for high-performance training — official HYROX, CrossFit, MMA and youth athletic development, all coached by specialists, all under the same roof as the club you already love.",
+    img=f"{IMG}/HYROX-Gym-Bucks-County-PA.png", crumb='<a href="fitness.html">Fitness</a> &nbsp;/&nbsp; Performance Institute',
+    actions=[("Try a Class Free", "join.html#trial", True), ("The programs", "#programs", False)],
+    meta=["HYROX · CrossFit · MMA", "Youth performance", "Coached by specialists"], page=True,
+) + f"""
+<section class="section" id="programs"><div class="wrap">
+  <div class="cards-head"><div><p class="eyebrow"><span class="num">01</span> Four ways to train</p><h2 class="h-display reveal" style="font-size:clamp(34px,4.6vw,72px)">Find your <span class="serif">discipline</span></h2></div></div>
+  <div class="card-grid" data-stagger>
+    <a class="card" href="hyrox.html"><div class="card__media"><img src="{IMG}/HYROX-Training-Classes.png" alt="HYROX" loading="lazy"><span class="card__num">01</span><div class="card__label"><h3>HYROX</h3><span class="go">Explore →</span></div></div><div class="card__below"><p>Official HYROX affiliate training — functional endurance and strength for the world's fastest-growing fitness race. Included with membership.</p></div></a>
+    <a class="card" href="#"><div class="card__media"><img src="{IMG}/HYROX-Gym-Bucks-County-PA.png" alt="CrossFit" loading="lazy"><span class="card__num">02</span><div class="card__label"><h3>CrossFit</h3><span class="go">Coached WODs →</span></div></div><div class="card__below"><p>Constantly varied, high-intensity functional training in a true CrossFit box, coached in a community that pushes each other.</p></div></a>
+    <a class="card" href="#"><div class="card__media"><img src="{IMG}/sports-performance-training-newtown-pa.jpg" alt="MMA" loading="lazy"><span class="card__num">03</span><div class="card__label"><h3>MMA &amp; Combat</h3><span class="go">Striking &amp; grappling →</span></div></div><div class="card__below"><p>Mixed martial arts, striking and grappling for every level — conditioning and skill, on the mats and the bags.</p></div></a>
+    <a class="card" href="youth-training.html"><div class="card__media"><img src="{IMG}/sports-performance-training-newtown-pa.jpg" alt="Youth performance" loading="lazy"><span class="card__num">04</span><div class="card__label"><h3>Youth Performance</h3><span class="go">Ages 7 to pro →</span></div></div><div class="card__below"><p>Speed, strength and confidence for young athletes — the former Parisi Speed School program, from age seven to the pros.</p></div></a>
+  </div>
+</div></section>
+""" + split(
+    "One membership tier", "02", 'Train harder without <span class="serif">leaving the club</span>',
+    ["The Performance Institute runs as its own program within the NAC, so you get specialist coaching and dedicated space without ever driving to a second gym. Some programs are included with your membership; others are their own tier.",
+     "Whether you're chasing a HYROX podium, a first pull-up or a black belt, there's a coach and a community here to get you there."],
+    f"{IMG}/HYROX-Training-Club-Newtown-PA.png", "Performance Institute", rev=True, cta=("Explore HYROX", "hyrox.html"), tag="Specialist coaching"
+) + cta_band('Push your <span class="serif">limits</span>', "Try a HYROX, CrossFit or MMA class on us and feel the difference specialist coaching makes.", f"{IMG}/HYROX-Gym-Bucks-County-PA.png")
+
+
+# ============================================================ ELEVATE EVENTS
+events_body = hero(
+    "Elevate Events", ["A venue for every", '<span class="serif">occasion</span>'],
+    "From corporate retreats to milestone celebrations, Elevate Events puts 250,000 square feet — plus the four-acre resort and the Village Farm — at your disposal. Distinctive spaces, full-service catering and a team that handles every detail.",
+    img=f"{IMG}/Escape-Resort-Newtown-PA.png", crumb='<a href="about.html">About</a> &nbsp;/&nbsp; Events',
+    actions=[("Request a Proposal", "contact.html", True), ("The spaces", "#spaces", False)],
+    meta=["Corporate &amp; social", "Poolside to barn", "Full-service catering"], page=True,
+) + f"""
+<section class="section" id="spaces"><div class="wrap">
+  <div class="cards-head"><div><p class="eyebrow"><span class="num">01</span> The spaces</p><h2 class="h-display reveal" style="font-size:clamp(34px,4.6vw,72px)">Rooms with <span class="serif">range</span></h2></div></div>
+  {rows([
+    ("The Escape Resort", "Book the four-acre outdoor resort — pools, cabanas and a poolside restaurant and bar — for summer parties, company outings and celebrations under the sun."),
+    ("The Village Farm", "A barn, open fields and animals make the farm a one-of-a-kind backdrop for weddings, festivals, markets and rustic celebrations."),
+    ("Studios &amp; Large Spaces", "Boutique studios and large indoor spaces flex for corporate meetings, expos, fitness activations and private events year-round."),
+    ("Full-Service Catering", "Our culinary team handles menus, bar and service, so you focus on your guests, not the logistics."),
+  ])}
+</div></section>
+""" + form_section(
+    "inquire", "02", "Let's plan it",
+    'Tell us about your <span class="serif">event</span>',
+    "Share a few details — the occasion, guest count and date you have in mind — and our events team will follow up with spaces, catering options and a proposal built for you.",
+    "Request a Proposal", light=True,
+) + cta_band('Host it at the <span class="serif">NAC</span>', "Corporate, social or somewhere in between — let's build an event your guests won't forget.", f"{IMG}/Escape-Resort-Newtown-PA.png", primary=("Request a Proposal", "#inquire"), secondary=("Visit the club", "contact.html"))
+
+
+# ============================================================ SEASONAL MEMBERSHIP
+seasonal_body = hero(
+    "Seasonal Membership", ["Home for the", '<span class="serif">season</span>'],
+    "Spending part of the year in Bucks County? The Seasonal Membership gives you full access to the entire club — pools, studios, weight rooms, childcare and more — on a six-month term, for those who live 25+ miles away.",
+    img=f"{IMG}/NAC-Website-Sections-11.jpg", crumb='<a href="membership.html">Membership</a> &nbsp;/&nbsp; Seasonal',
+    actions=[("Request Seasonal Rates", "contact.html", True), ("The details", "#details", False)],
+    meta=["6-month term", "Full club access", "For 25+ mile residents"], page=True,
+) + f"""
+<section class="section" id="details"><div class="wrap"><div class="intro-grid">
+  <div><p class="eyebrow"><span class="num">01</span> How it works</p><h2 class="h-display reveal">Full access, for a <span class="serif">season</span></h2></div>
+  <div class="intro-grid__right">
+    <p class="lede reveal">The Seasonal Membership is designed for guests who split their year between Bucks County and elsewhere. It carries a six-month minimum term and is available to those whose primary residence is at least 25 miles away.</p>
+    <p class="body-copy reveal">Your membership includes everything the club offers — the indoor and outdoor pools, boutique studios, weight rooms, sauna and steam, and complimentary childcare — so a season here feels like home.</p>
+    <div class="reveal"><a class="inline-link" href="contact.html">Ask about seasonal rates →</a></div>
+  </div>
+</div></div></section>
+""" + cta_band('Make the NAC your <span class="serif">home base</span>', "Here for the season? Get full access on a six-month term. Contact us for current rates.", f"{IMG}/NAC-Website-Sections-13.jpg", primary=("Request Rates", "contact.html"))
+
+
+# ============================================================ FINANCIAL ASSISTANCE / SCHOLARSHIP
+scholarship_body = hero(
+    "Financial Assistance", ["Health belongs to", '<span class="serif">everyone</span>'],
+    "The NAC believes a healthy life shouldn't depend on your bank balance. For more than twenty years, our Financial Scholarship Program has helped thousands of neighbors access the club, its programs and its community.",
+    img=f"{IMG}/NAC-Website-Sections-8.jpg", crumb='<a href="membership.html">Membership</a> &nbsp;/&nbsp; Financial Assistance',
+    actions=[("Apply for Assistance", "contact.html", True), ("Our giving", "giving.html", False)],
+    meta=["20+ years", "Thousands helped", "Powered by Have a Heart"], page=True,
+) + split(
+    "A club for the community", "01", 'Removing the <span class="serif">barriers</span> to health',
+    ["Through the NAC Financial Scholarship Program — supported by our Have a Heart Foundation — qualifying individuals and families receive assistance toward membership so cost never stands between someone and their health.",
+     "It's part of who we've been for over two decades: a club that gives back more than a million dollars a year to the community it calls home."],
+    f"{IMG}/NAC-Website-Sections-7.jpg", "Financial assistance", cta=("Learn about our giving", "giving.html"), tag="Since day one"
+) + cta_band('Everyone deserves a <span class="serif">home for health</span>', "If cost is a barrier, let's talk. Reach out to learn about the Financial Scholarship Program.", f"{IMG}/NAC-Website-Sections-8.jpg", primary=("Apply", "contact.html"), secondary=("Have a Heart", "giving.html"))
+
+
+# ============================================================ BUILD ALL
 N = "Newtown Athletic Club"
 PAGES = [
     ("index.html", f"{N} | Your Home for Health | Bucks County, PA", "Named one of the top lifestyle clubs on the globe — 250,000 sq. ft. of fitness, boutique studios, a four-acre resort, wellness, family programs and more in Newtown, PA. Get a free pass.", "", home_body),
     ("membership.html", f"Membership | {N}", "One age-based membership opens everything — 12,000 sq. ft. fitness center, 200+ weekly studio classes, complimentary childcare, resort-style locker rooms and the Escape Resort.", "membership.html", membership_body),
+    ("performance.html", f"Newtown Performance Institute | {N}", "HYROX, CrossFit, MMA and youth performance training — specialist coaching under one roof at the NAC.", "fitness.html", npi_body),
+    ("the-well-lounge.html", f"The Well Lounge Med Spa | {N}", "The NAC's medical spa — EmSculpt NEO, HALO & BBL skin resurfacing, injectables, medical facials and IV wellness. 215-360-3940.", "wellness.html", well_body),
+    ("village-farm.html", f"The Village Farm | {N}", "The NAC's outdoor farm — Goat Yoga, animals, pony rides, markets, movies, festivals, camps and birthday parties.", "family.html", village_body),
+    ("events.html", f"Elevate Events — Venue Rentals | {N}", "Host your event at the NAC — the Escape Resort, the Village Farm, studios and large spaces, with full-service catering.", "about.html", events_body),
+    ("seasonal.html", f"Seasonal Membership | {N}", "Full club access on a six-month term for part-year Bucks County residents living 25+ miles away.", "membership.html", seasonal_body),
+    ("scholarship.html", f"Financial Assistance | {N}", "The NAC Financial Scholarship Program — 20+ years helping neighbors access the club, powered by the Have a Heart Foundation.", "membership.html", scholarship_body),
     ("pricing.html", f"Pricing | {N}", "Age-based membership pricing for the NAC — indoor and outdoor resort pools, boutique studios, family activities and luxury locker rooms. HSA/FSA accepted.", "membership.html", pricing_body),
     ("join.html", f"Join | {N}", "Three ways to join — NAC Lifestyle ($229/mo), NPI Membership ($169/mo) or NPI Gym Access ($79/mo). Get a complimentary pass and a free Health Strategy Session.", "", join_body),
     ("premier.html", f"NAC Premier | {N}", "An exclusive wellness upgrade — concierge fitness coach, advanced bloodwork, functional medicine, red light therapy, unlimited recovery and more.", "membership.html", premier_body),
